@@ -16,7 +16,7 @@ public class Main {
 
                 case "echo":
                     String output = command.split(" ", 2)[1];
-                    System.out.println(output)
+                    System.out.println(output);
             
                 default:
                     break;
