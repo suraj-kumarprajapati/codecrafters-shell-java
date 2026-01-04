@@ -10,8 +10,16 @@ public class Main {
 
             String command = scanner.nextLine();
 
-            if (command.equals("exit")) {
-                break;
+            switch (command) {
+                case "exit":
+                    break;
+
+                case "echo":
+                    String output = command.split(" ", 2)[1];
+                    System.out.println(output)
+            
+                default:
+                    break;
             }
 
             System.out.println(command + ": command not found");
