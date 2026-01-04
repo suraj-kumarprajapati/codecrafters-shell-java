@@ -10,7 +10,16 @@ public class Main {
 
             Scanner scanner = new Scanner(System.in);
             String command = scanner.nextLine();
+            
+            if(command.equals("exit")) return;
+
             System.out.println(command + ": command not found");
+
+
+
+            scanner.close();
         }
+
+        
     }
 }
