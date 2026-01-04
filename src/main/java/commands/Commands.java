@@ -1,9 +1,7 @@
 package commands;
 
 import java.util.*;
-
-import commands.impl.Type;
-
+import commands.impl.*;;
 
 
 
