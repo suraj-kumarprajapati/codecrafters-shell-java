@@ -14,7 +14,7 @@ public class Main {
             switch (command) {
 
                 case "exit":
-                    break;
+                    return;
 
                 case "echo":
 
