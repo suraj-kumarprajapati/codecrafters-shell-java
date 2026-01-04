@@ -8,14 +8,19 @@ public class Main {
         while (true) {
             System.out.print("$ ");
 
-            String command = scanner.nextLine();
+            String input = scanner.nextLine();
+            String command = input.split(" ")[0];
 
             switch (command) {
+
+
+
                 case "exit":
                     break;
 
                 case "echo":
-                    String output = command.split(" ", 2)[1];
+                    
+                    String output = input.split(" ", 2)[1];
                     System.out.println(output);
             
                 default:
