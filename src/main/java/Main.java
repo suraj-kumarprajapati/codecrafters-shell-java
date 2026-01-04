@@ -13,21 +13,20 @@ public class Main {
 
             switch (command) {
 
-
-
                 case "exit":
                     break;
 
                 case "echo":
-                    
+
                     String output = input.split(" ", 2)[1];
                     System.out.println(output);
-            
+                    break;
+
                 default:
+
+                    System.out.println(command + ": command not found");
                     break;
             }
-
-            System.out.println(command + ": command not found");
 
         }
 
