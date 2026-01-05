@@ -19,7 +19,6 @@ public class Type implements ICommand {
 
         String name = args[1];
 
-
         // search in hashmap for builtin type
         ICommand cmd = BuiltinCommandsResolver.get(name);
         if (cmd != null) {

@@ -4,10 +4,10 @@ import commands.ICommand;
 
 public class ExternalCommand implements ICommand {
 
-    private final String executablePath;
+    private final String command;
 
-    public ExternalCommand(String executablePath) {
-        this.executablePath = executablePath;
+    public ExternalCommand(String command) {
+        this.command = command;
     }
 
     @Override
@@ -15,7 +15,7 @@ public class ExternalCommand implements ICommand {
         
         try {
             // Replace command name with absolute executable path
-            args[0] = executablePath; 
+            args[0] = command; 
             
             ProcessBuilder pb = new ProcessBuilder(args);
             // show output to the shell

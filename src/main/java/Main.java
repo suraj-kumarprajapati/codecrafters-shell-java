@@ -3,29 +3,26 @@ import java.util.Scanner;
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
+import helpers.Parser;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
+        Parser parser = null;
 
         while (true) {
             System.out.print("$ ");
 
             String input = scanner.nextLine();
-            String[] splittedInput = input.split(" ", 2);
+            
 
-            // (advanced) - for external commands
-            String[] tokens = input.split("\\s+");
+            // (advanced)
+            parser = new Parser(input);
+            // String[] newArgs = input.split("\\s+");
+            String[] newArgs = parser.parse();
 
-            String commandName = splittedInput[0];
-
-            String[] newArgs;
-            if (splittedInput.length > 1) {
-                newArgs = new String[] { commandName, splittedInput[1] };
-            } else {
-                newArgs = new String[] { commandName };
-            }
+            String commandName = newArgs[0];
 
             ICommand cmd = BuiltinCommandsResolver.get(commandName);
             if (cmd != null) {
@@ -35,7 +32,7 @@ public class Main {
                 ICommand exCommand = ExternalCommandsResolver.resolve(commandName);
 
                 if (exCommand != null) {
-                    exCommand.execute(tokens);
+                    exCommand.execute(newArgs);
                 } else {
                     System.out.println(commandName + ": command not found");
                 }
