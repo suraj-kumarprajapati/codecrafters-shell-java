@@ -2,13 +2,14 @@ package commands.impl;
 
 import java.io.File;
 
-import commands.Command;
-import commands.Commands;
+import commands.BuiltinCommandsResolver;
+import commands.ICommand;
 
 
 
-public class Type implements Command {
+public class Type implements ICommand {
 
+    // first argument is command and rest are arguments
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {
@@ -19,14 +20,14 @@ public class Type implements Command {
         String name = args[1];
 
 
-        // search in hashmap
-        Command cmd = Commands.get(name);
+        // search in hashmap for builtin type
+        ICommand cmd = BuiltinCommandsResolver.get(name);
         if (cmd != null) {
             System.out.println(name + " is a shell builtin");
             return;
         } 
 
-        // search in path
+        // search in path for external command type
         String pathEnv = System.getenv("PATH");
         if(pathEnv == null) {
             System.out.println(name + ": not found");

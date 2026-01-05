@@ -1,7 +1,8 @@
 package commands.impl;
-import commands.Command;
 
-public class Echo implements Command {
+import commands.ICommand;
+
+public class Echo implements ICommand {
 
     @Override
     public void execute(String[] args) {

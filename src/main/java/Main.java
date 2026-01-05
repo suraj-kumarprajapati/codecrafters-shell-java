@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-import commands.Command;
-import commands.Commands;
+import commands.BuiltinCommandsResolver;
+import commands.ExternalCommandsResolver;
+import commands.ICommand;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -17,21 +18,25 @@ public class Main {
             String commandName = splittedInput[0];
 
             String[] newArgs;
-            if(splittedInput.length > 1) {
-                newArgs = new String[] {commandName, splittedInput[1]};
-            }
-            else {
-                newArgs = new String[] {commandName};
+            if (splittedInput.length > 1) {
+                newArgs = new String[] { commandName, splittedInput[1] };
+            } else {
+                newArgs = new String[] { commandName };
             }
 
-
-            Command cmd = Commands.get(commandName);
+            ICommand cmd = BuiltinCommandsResolver.get(commandName);
             if (cmd != null) {
                 cmd.execute(newArgs);
             } else {
-                System.out.println(commandName + ": command not found");
-            }
 
+                ICommand exCommand = ExternalCommandsResolver.resolve(commandName);
+
+                if (exCommand != null) {
+                    exCommand.execute(args);
+                } else {
+                    System.out.println(commandName + ": command not found");
+                }
+            }
         }
 
     }

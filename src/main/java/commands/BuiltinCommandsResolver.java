@@ -5,8 +5,8 @@ import commands.impl.*;;
 
 
 
-public class Commands {
-    private static final Map<String, Command> commands = new HashMap<>();
+public class BuiltinCommandsResolver {
+    private static final Map<String, ICommand> commands = new HashMap<>();
 
     static {
         commands.put("exit", new Exit());
@@ -14,7 +14,7 @@ public class Commands {
         commands.put("type", new Type());
     }
 
-    public static Command get(String name) {
+    public static ICommand get(String name) {
         return commands.get(name);
     }
 

@@ -1,7 +1,8 @@
 package commands.impl;
-import commands.Command;
 
-public class Exit implements Command {
+import commands.ICommand;
+
+public class Exit implements ICommand {
 
     @Override
     public void execute(String[] args) {
