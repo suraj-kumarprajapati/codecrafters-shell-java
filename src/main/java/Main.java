@@ -15,6 +15,9 @@ public class Main {
             String input = scanner.nextLine();
             String[] splittedInput = input.split(" ", 2);
 
+            // (advanced) - for external commands
+            String[] tokens = input.split("\\s+");
+
             String commandName = splittedInput[0];
 
             String[] newArgs;
@@ -32,7 +35,7 @@ public class Main {
                 ICommand exCommand = ExternalCommandsResolver.resolve(commandName);
 
                 if (exCommand != null) {
-                    exCommand.execute(args);
+                    exCommand.execute(tokens);
                 } else {
                     System.out.println(commandName + ": command not found");
                 }
