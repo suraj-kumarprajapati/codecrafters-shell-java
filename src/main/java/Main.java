@@ -25,7 +25,7 @@ public class Main {
             String commandName = newArgs[0];
 
             ICommand cmd = BuiltinCommandsResolver.get(commandName);
-            if (cmd != null) {
+            if (cmd != null) {  
                 cmd.execute(newArgs);
             } else {
 
