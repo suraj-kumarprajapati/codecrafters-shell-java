@@ -20,7 +20,7 @@ public class ExternalCommandsResolver {
         for(String dir : paths) {
             File file = new File(dir, commandName);
             if(file.exists() && file.canExecute()) {
-                return new ExternalCommand(file.getAbsolutePath());
+                return new ExternalCommand(commandName);
             }
         }
 
