@@ -13,6 +13,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         while (true) {
+            // print stream is console at the moment
+            PrintStream console = System.out;
+
             System.out.print("$ ");
 
             String input = scanner.nextLine();
@@ -39,7 +42,6 @@ public class Main {
             }
             
             // set print stream to console
-            PrintStream console = System.out;
             System.setOut(console);
         }
 
