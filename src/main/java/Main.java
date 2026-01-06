@@ -12,7 +12,7 @@ public class Main {
         Parser parser = null;
 
         while (true) {
-            System.out.print("$ ");
+            System.out.print("$ ");  
 
             String input = scanner.nextLine();
             
