@@ -72,6 +72,11 @@ public class Parser {
         return args.toArray(new String[0]);
     }
 
+
+    /* 
+
+    // this functionality has been redirected to the Redirection class
+
     public String[] redirectArguments(String[] args) throws FileNotFoundException {
         int n = args.length;
 
@@ -93,7 +98,6 @@ public class Parser {
         }
 
         return args;
-
     }
 
     private boolean isRedirectOperatorFile(String arg) {
@@ -110,4 +114,6 @@ public class Parser {
 
         return false;
     }
+
+    */
 }

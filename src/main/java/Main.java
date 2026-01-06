@@ -1,10 +1,12 @@
 import java.io.PrintStream;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
 import helpers.Parser;
+import helpers.Redirection;
 
 public class Main {
 
@@ -25,8 +27,11 @@ public class Main {
 
             // parse the input
             Parser parser = new Parser(input);
-            String[] newArgs = parser.parse();
-            newArgs = parser.redirectArguments(newArgs);
+            String[] tokens = parser.parse();
+
+            // redirect the arguments
+            Redirection redirection = new Redirection(tokens, Path.of("."));
+            String[] newArgs = redirection.redirectArguments();
 
             String commandName = newArgs[0];
 
