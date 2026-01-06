@@ -6,26 +6,25 @@ import commands.ICommand;
 import helpers.Parser;
 
 public class Main {
+
+    public static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) throws Exception {
 
-        Scanner scanner = new Scanner(System.in);
-        Parser parser = null;
-
         while (true) {
-            System.out.print("$ ");  
+            System.out.print("$ ");
 
             String input = scanner.nextLine();
-            
 
-            // (advanced)
-            parser = new Parser(input);
-            // String[] newArgs = input.split("\\s+");
+            // parse the input
+            Parser parser = new Parser(input);
             String[] newArgs = parser.parse();
+            newArgs = parser.redirectArguments(newArgs);
 
             String commandName = newArgs[0];
 
             ICommand cmd = BuiltinCommandsResolver.get(commandName);
-            if (cmd != null) {  
+            if (cmd != null) {
                 cmd.execute(newArgs);
             } else {
 
