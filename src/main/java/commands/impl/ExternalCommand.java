@@ -1,5 +1,6 @@
 package commands.impl;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import commands.ICommand;
@@ -15,8 +16,6 @@ public class ExternalCommand implements ICommand {
     @Override
     public void execute(String[] args) {
 
-        PrintStream originalOut = System.out;
-        PrintStream originalErr = System.err;
         
         try {
             // Replace command name with absolute executable path
@@ -27,20 +26,24 @@ public class ExternalCommand implements ICommand {
             // show output to the parent process's stream
             // pb.inheritIO();  
 
-            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-
             Process process = pb.start();
+
+              // PIPE stdout to System.out
+            try (InputStream out = process.getInputStream()) {
+                out.transferTo(System.out);
+            }
+
+            // PIPE stderr to System.err
+            try (InputStream err = process.getErrorStream()) {
+                err.transferTo(System.err);
+            }
+
             process.waitFor();
         }
         catch(Exception e) {
 
         }
-        finally {
-            // Restore Java streams 
-            System.setOut(originalOut);
-            System.setErr(originalErr);
-        }
+       
     }
 
 }
