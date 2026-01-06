@@ -31,9 +31,32 @@ public class Parser {
             else if (c == '\'' && !inDoubleQuotes) {
                 inSingleQuotes = !inSingleQuotes;    // toggle single quotes
             }
-            else if(c == '\\' && !inDoubleQuotes && !inSingleQuotes && i+1 < n) {
-                // increment i and append char
-                current.append(original.charAt(++i));
+            else if(c == '\\' && i+1 < n) {
+                char next = original.charAt(i + 1);
+                // check if inside double quotes only
+                if(inDoubleQuotes && !inSingleQuotes) {
+                    if(next == '"' || next == '\\') {
+                        current.append(next);
+                        i += 1;
+                    }
+                    else {
+                        // backslash is literal itself, no special treatment
+                        current.append(c);
+                    }
+                }
+                // neither inside the double quote not inside the single quote
+                // special treatment outside
+                else if(!inSingleQuotes && !inDoubleQuotes) {
+                    current.append(next);
+                    i += 1;
+                }
+                // inside single quotes
+                // no special treatment
+                else {
+                    current.append(c);
+                }
+
+                
             }
             else if (c == ' ' && !inDoubleQuotes && !inSingleQuotes) {
                 if (current.length() > 0) {
