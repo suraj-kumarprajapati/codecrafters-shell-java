@@ -11,10 +11,11 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
+        
+        // print stream is console at the moment
+        PrintStream console = System.out;
 
         while (true) {
-            // print stream is console at the moment
-            PrintStream console = System.out;
 
             System.out.print("$ ");
 
