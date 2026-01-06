@@ -23,19 +23,19 @@ public class Parser {
         boolean inSingleQuotes = false;
 
         for(int i=0; i<n; i++) {
-            char c = original.charAt(i);
+            char c = original.charAt(i);  
             
             if (c == '"' && !inSingleQuotes) {
                 inDoubleQuotes = !inDoubleQuotes;    // toggle double quotes
-                continue;
             }
-
-            if (c == '\'' && !inDoubleQuotes) {
+            else if (c == '\'' && !inDoubleQuotes) {
                 inSingleQuotes = !inSingleQuotes;    // toggle single quotes
-                continue;
             }
-
-            if (c == ' ' && !inDoubleQuotes && !inSingleQuotes) {
+            else if(c == '\\' && !inDoubleQuotes && !inSingleQuotes && i+1 < n) {
+                // increment i and append char
+                current.append(original.charAt(++i));
+            }
+            else if (c == ' ' && !inDoubleQuotes && !inSingleQuotes) {
                 if (current.length() > 0) {
                     args.add(current.toString());
                     current.setLength(0); // reset
