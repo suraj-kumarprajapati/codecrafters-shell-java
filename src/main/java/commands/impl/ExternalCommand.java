@@ -18,8 +18,9 @@ public class ExternalCommand implements ICommand {
             args[0] = command; 
             
             ProcessBuilder pb = new ProcessBuilder(args);
-            // show output to the shell
-            pb.inheritIO();  
+            
+            // show output to the parent process's stream
+            // pb.inheritIO();  
 
             Process process = pb.start();
             process.waitFor();
