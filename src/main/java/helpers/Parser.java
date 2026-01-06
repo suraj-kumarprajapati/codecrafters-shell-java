@@ -72,28 +72,41 @@ public class Parser {
         return args.toArray(new String[0]);
     }
 
-    public String[] redirectArguments(String[] args) throws FileNotFoundException{
+    public String[] redirectArguments(String[] args) throws FileNotFoundException {
         int n = args.length;
 
-        if (n > 2 && isRedirectOperator(args[n - 2])) {
+        if (n > 2) {
+            String operator = args[n - 2];
             String file = args[n - 1];
 
-            // set the standard output to file
-            PrintStream printStream = new PrintStream(file);
-            System.setOut(printStream);
-
-            return Arrays.copyOfRange(args, 0, n - 2);
-
-        } else {
-            return args;
+            if (isRedirectOperatorFile(operator)) {
+                // set the standard output to file
+                PrintStream printStream = new PrintStream(file);
+                System.setOut(printStream);
+                return Arrays.copyOfRange(args, 0, n - 2);
+            } else if (isRedirectOperatorErrorFile(operator)) {
+                // set the standard error of error file
+                PrintStream errStream = new PrintStream(file);
+                System.setErr(errStream);
+                return Arrays.copyOfRange(args, 0, n - 2);
+            }
         }
+
+        return args;
 
     }
 
-    private boolean isRedirectOperator(String arg) {
+    private boolean isRedirectOperatorFile(String arg) {
         if (arg.equals(">") || arg.equals("1>")) {
             return true;
         }
+
+        return false;
+    }
+
+    private boolean isRedirectOperatorErrorFile(String arg) {
+        if (arg.equals("2>"))
+            return true;
 
         return false;
     }

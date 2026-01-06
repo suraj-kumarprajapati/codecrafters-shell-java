@@ -1,7 +1,6 @@
 package commands.impl;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 
 import commands.ICommand;
 
@@ -28,12 +27,14 @@ public class ExternalCommand implements ICommand {
 
             Process process = pb.start();
 
-              // PIPE stdout to System.out
+            // PIPE stdout to System.out
+            // process.getInputStream() = output stream of process or command
             try (InputStream out = process.getInputStream()) {
                 out.transferTo(System.out);
             }
 
             // PIPE stderr to System.err
+            // process.getErrorStream() = stderr of the external command
             try (InputStream err = process.getErrorStream()) {
                 err.transferTo(System.err);
             }

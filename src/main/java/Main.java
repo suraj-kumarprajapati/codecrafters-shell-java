@@ -15,6 +15,7 @@ public class Main {
         // print stream is console at the moment
         // save console before redirection
         PrintStream console = System.out;
+        PrintStream error = System.err;
 
         while (true) {
 
@@ -45,6 +46,7 @@ public class Main {
             
             // set print stream to console
             System.setOut(console);
+            System.setErr(error);
         }
 
     }
