@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import commands.BuiltinCommandsResolver;
@@ -36,6 +37,10 @@ public class Main {
                     System.out.println(commandName + ": command not found");
                 }
             }
+            
+            // set print stream to console
+            PrintStream console = System.out;
+            System.setOut(console);
         }
 
     }
