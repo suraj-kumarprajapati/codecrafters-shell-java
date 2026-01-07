@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.jline.jansi.AnsiConsole;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.impl.DefaultParser;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
@@ -20,7 +21,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        AnsiConsole.systemInstall();
 
         // jline functionalities
         Terminal terminal = TerminalBuilder
@@ -34,6 +34,7 @@ public class Main {
                 .builder()
                 .terminal(terminal)
                 .completer(completer)
+                .parser(new DefaultParser())
                 .build();
 
         String prompt = "$ ";
