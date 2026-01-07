@@ -66,7 +66,7 @@ public class Main {
             }
 
             // set print stream to console
-            System.setOut(console);
+            System.setOut(console); 
             System.setErr(error);
         }
 
