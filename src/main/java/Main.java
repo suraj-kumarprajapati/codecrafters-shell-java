@@ -18,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        System.setProperty("jline.native", "false");
+
         // jline functionalities
         Terminal terminal = TerminalBuilder
                 .builder()
