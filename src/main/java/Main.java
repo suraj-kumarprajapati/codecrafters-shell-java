@@ -2,17 +2,35 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
+import helpers.BuiltinCompleter;
 import helpers.Parser;
 import helpers.Redirection;
 
 public class Main {
 
-    public static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) throws Exception {
+
+        // jline functionalities
+        Terminal terminal = TerminalBuilder
+                .builder()
+                .system(true)
+                .build();
+
+        LineReader reader = LineReaderBuilder
+                .builder()
+                .terminal(terminal)
+                .completer(new BuiltinCompleter())
+                .build();
+
+        String prompt = "$ ";
 
         // print stream is console at the moment
         // save console before redirection
@@ -21,9 +39,7 @@ public class Main {
 
         while (true) {
 
-            System.out.print("$ ");
-
-            String input = scanner.nextLine();
+            String input = reader.readLine(prompt);
 
             // parse the input
             Parser parser = new Parser(input);
@@ -48,7 +64,7 @@ public class Main {
                     System.out.println(commandName + ": command not found");
                 }
             }
-            
+
             // set print stream to console
             System.setOut(console);
             System.setErr(error);

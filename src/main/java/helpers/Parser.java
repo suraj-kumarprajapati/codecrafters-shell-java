@@ -75,7 +75,7 @@ public class Parser {
 
     /* 
 
-    // this functionality has been redirected to the Redirection class
+    // this functionality has been moved to the Redirection class
 
     public String[] redirectArguments(String[] args) throws FileNotFoundException {
         int n = args.length;
