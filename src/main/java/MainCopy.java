@@ -1,6 +1,5 @@
 import java.io.PrintStream;
 import java.nio.file.Path;
-import java.util.Scanner;
 
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
@@ -12,15 +11,28 @@ import org.jline.terminal.TerminalBuilder;
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
-import helpers.BuiltinCompleter;
 import helpers.Parser;
 import helpers.Redirection;
 
-public class Main {
-
-    public static final Scanner scanner = new Scanner(System.in);
+public class MainCopy {
 
     public static void main(String[] args) throws Exception {
+
+
+        // jline functionalities
+        Terminal terminal = TerminalBuilder
+                .builder()
+                .system(true)
+                .build();
+
+        StringsCompleter completer = new StringsCompleter("echo", "exit");
+
+        LineReader reader = LineReaderBuilder
+                .builder()
+                .terminal(terminal)
+                .completer(completer)
+                .parser(new DefaultParser())
+                .build();
 
         String prompt = "$ ";
 
@@ -31,9 +43,7 @@ public class Main {
 
         while (true) {
 
-            System.out.print(prompt);
-
-            String input = scanner.nextLine();
+            String input = reader.readLine(prompt);
 
             // parse the input
             Parser parser = new Parser(input);
@@ -60,7 +70,7 @@ public class Main {
             }
 
             // set print stream to console
-            System.setOut(console);
+            System.setOut(console); 
             System.setErr(error);
         }
 

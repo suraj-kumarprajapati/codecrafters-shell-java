@@ -16,7 +16,7 @@ import helpers.BuiltinCompleter;
 import helpers.Parser;
 import helpers.Redirection;
 
-public class Main {
+public class MainCopy2 {
 
     public static final Scanner scanner = new Scanner(System.in);
 

@@ -12,6 +12,7 @@ public class BuiltinCommandsResolver {
         commands.put("exit", new Exit());
         commands.put("echo", new Echo());
         commands.put("type", new Type());
+        commands.put("pwd", new Pwd());
     }
 
     public static ICommand get(String name) {

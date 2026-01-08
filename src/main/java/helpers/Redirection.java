@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Redirection {
 
-    private String[] args;
-    private Path currDir;
+    private final String[] args;
+    private final Path currDir;
 
     public Path stdoutFile;
     public Path stderrFile;

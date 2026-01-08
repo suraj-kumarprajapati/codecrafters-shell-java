@@ -1,8 +1,11 @@
 package commands.impl;
 
-import java.io.InputStream;
+import java.io.*;
+import java.util.Arrays;
 
 import commands.ICommand;
+
+import static java.nio.file.Files.readAllBytes;
 
 public class ExternalCommand implements ICommand {
 

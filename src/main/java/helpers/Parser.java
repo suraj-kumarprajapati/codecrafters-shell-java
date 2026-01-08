@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Parser {
 
-    private String original;
+    private final String original;
 
     public Parser(String original) {
         this.original = original;

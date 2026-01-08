@@ -2,6 +2,8 @@ package commands.impl;
 
 import commands.ICommand;
 
+import java.io.*;
+
 public class Echo implements ICommand {
 
     @Override
@@ -21,5 +23,6 @@ public class Echo implements ICommand {
             System.out.println("echo: missing operand");
         }
     }
+
 
 }

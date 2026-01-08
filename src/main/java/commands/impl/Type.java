@@ -1,6 +1,6 @@
 package commands.impl;
 
-import java.io.File;
+import java.io.*;
 
 import commands.BuiltinCommandsResolver;
 import commands.ICommand;
