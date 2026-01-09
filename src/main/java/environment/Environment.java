@@ -6,6 +6,8 @@ public interface Environment {
     Path getCurrentDirectory();
     void changeDirectory(Path path);
     String getEnvironmentVariable(String name);
+
+
 }
 
 
