@@ -22,7 +22,7 @@ public class SystemEnvironment implements Environment{
 
     @Override
     public void changeDirectory(Path path) {
-        Path newPath = resolveDirectory(path);
+        Path newPath = resolveDirectory(path).normalize();
 
         if(!Files.exists(newPath) || !Files.isDirectory(newPath)) {
             System.out.println(newPath + ": No such file or directory");
