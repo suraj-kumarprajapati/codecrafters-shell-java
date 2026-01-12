@@ -23,32 +23,7 @@ public class Main {
     public static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-
-        // jline functionalities
-        Terminal terminal = TerminalBuilder
-                .builder()
-                .system(true)
-                .build();
-
-        StringsCompleter completer = new StringsCompleter("echo", "exit");
-
-        LineReader reader = LineReaderBuilder
-                .builder()
-                .terminal(terminal)
-                .completer(completer)
-                .parser(new DefaultParser())
-                .build();
-
-        reader.unsetOpt(LineReader.Option.INSERT_TAB);
-        reader.setOpt(LineReader.Option.COMPLETE_IN_WORD);
-
-        reader.getKeyMaps()
-                .get(LineReader.MAIN)
-                .bind(new Reference(LineReader.COMPLETE_WORD),
-                        KeyMap.ctrl('I'));
-
         String prompt = "$ ";
-
 
         // print stream is console at the moment
         // save console before redirection
@@ -56,11 +31,8 @@ public class Main {
         PrintStream error = System.err;
 
         while (true) {
-
-//            System.out.print(prompt);
-//            String input = scanner.nextLine();
-
-            String input = reader.readLine(prompt);
+            System.out.print(prompt);
+            String input = scanner.nextLine();
 
             // parse the input
             Parser parser = new Parser(input);
