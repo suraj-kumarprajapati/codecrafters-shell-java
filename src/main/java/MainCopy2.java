@@ -2,19 +2,11 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
-import org.jline.reader.impl.DefaultParser;
-import org.jline.reader.impl.completer.StringsCompleter;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
-import helpers.BuiltinCompleter;
-import helpers.Parser;
-import helpers.Redirection;
+import parser.Parser;
+import redirection.Redirection;
 
 public class MainCopy2 {
 

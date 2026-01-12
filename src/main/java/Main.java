@@ -2,21 +2,21 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import environment.Environment;
-import environment.SystemEnvironment;
+import commands.BuiltinCommandsResolver;
+import commands.ExternalCommandsResolver;
+import commands.ICommand;
+
+import helpers.BuiltinCompleter;
+import org.jline.keymap.KeyMap;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.Reference;
 import org.jline.reader.impl.DefaultParser;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
-
-import commands.BuiltinCommandsResolver;
-import commands.ExternalCommandsResolver;
-import commands.ICommand;
-import helpers.BuiltinCompleter;
-import helpers.Parser;
-import helpers.Redirection;
+import parser.Parser;
+import redirection.Redirection;
 
 public class Main {
 
@@ -24,7 +24,31 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        // jline functionalities
+        Terminal terminal = TerminalBuilder
+                .builder()
+                .system(true)
+                .build();
+
+        StringsCompleter completer = new StringsCompleter("echo", "exit");
+
+        LineReader reader = LineReaderBuilder
+                .builder()
+                .terminal(terminal)
+                .completer(completer)
+                .parser(new DefaultParser())
+                .build();
+
+        reader.unsetOpt(LineReader.Option.INSERT_TAB);
+        reader.setOpt(LineReader.Option.COMPLETE_IN_WORD);
+
+        reader.getKeyMaps()
+                .get(LineReader.MAIN)
+                .bind(new Reference(LineReader.COMPLETE_WORD),
+                        KeyMap.ctrl('I'));
+
         String prompt = "$ ";
+
 
         // print stream is console at the moment
         // save console before redirection
@@ -33,9 +57,10 @@ public class Main {
 
         while (true) {
 
-            System.out.print(prompt);
+//            System.out.print(prompt);
+//            String input = scanner.nextLine();
 
-            String input = scanner.nextLine();
+            String input = reader.readLine(prompt);
 
             // parse the input
             Parser parser = new Parser(input);

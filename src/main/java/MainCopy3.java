@@ -1,38 +1,18 @@
-import java.io.PrintStream;
-import java.nio.file.Path;
-
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
-import org.jline.reader.impl.DefaultParser;
-import org.jline.reader.impl.completer.StringsCompleter;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-
 import commands.BuiltinCommandsResolver;
 import commands.ExternalCommandsResolver;
 import commands.ICommand;
 import parser.Parser;
 import redirection.Redirection;
 
-public class MainCopy {
+import java.io.PrintStream;
+import java.nio.file.Path;
+import java.util.Scanner;
+
+public class MainCopy3 {
+
+    public static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-
-
-        // jline functionalities
-        Terminal terminal = TerminalBuilder
-                .builder()
-                .system(true)
-                .build();
-
-        StringsCompleter completer = new StringsCompleter("echo", "exit");
-
-        LineReader reader = LineReaderBuilder
-                .builder()
-                .terminal(terminal)
-                .completer(completer)
-                .parser(new DefaultParser())
-                .build();
 
         String prompt = "$ ";
 
@@ -43,7 +23,9 @@ public class MainCopy {
 
         while (true) {
 
-            String input = reader.readLine(prompt);
+            System.out.print(prompt);
+
+            String input = scanner.nextLine();
 
             // parse the input
             Parser parser = new Parser(input);
@@ -70,7 +52,7 @@ public class MainCopy {
             }
 
             // set print stream to console
-            System.setOut(console); 
+            System.setOut(console);
             System.setErr(error);
         }
 
